@@ -1,0 +1,60 @@
+﻿@model TrashCollector.Models.Customer
+
+@{
+    ViewBag.Title = "Cancel Pickup";
+}
+
+<h2>Cancel Pickup</h2>
+
+<h3>Are you sure you want to cancel this pickup?</h3>
+<div>
+    <h4>Pickup</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.Address1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address.Address1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.Address2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address.Address2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.Zipcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address.Zipcode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pickups.PickupDay)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pickups.PickupDay)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pickups.IsCompleted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pickups.IsCompleted)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

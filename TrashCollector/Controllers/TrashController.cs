@@ -12,25 +12,21 @@ namespace TrashCollector.Controllers
         // instantuating database object
         ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Trash
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Trash/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Trash/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Trash/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -46,13 +42,11 @@ namespace TrashCollector.Controllers
             }
         }
 
-        // GET: Trash/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Trash/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -68,13 +62,11 @@ namespace TrashCollector.Controllers
             }
         }
 
-        // GET: Trash/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Trash/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

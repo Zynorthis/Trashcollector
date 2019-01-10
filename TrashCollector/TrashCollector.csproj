@@ -258,10 +258,14 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Trashcollection\Index.cshtml" />
     <Content Include="Views\Trashcollection\Customer\CreatePickup.cshtml" />
+    <Content Include="Views\Trashcollection\Customer\PickupDetails.cshtml" />
+    <Content Include="Views\Trashcollection\Customer\CancelPickup.cshtml" />
+    <Content Include="Views\Trashcollection\Customer\EditPickup.cshtml" />
+    <Content Include="Views\Trashcollection\Employee\MapRoute.cshtml" />
+    <Content Include="Views\Trashcollection\Employee\DisplayPickups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Trashcollection\Employee\" />
     <Folder Include="Views\Trash\" />
   </ItemGroup>
   <ItemGroup>
