@@ -256,7 +256,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Trashcollection\Index.cshtml" />
+    <Content Include="Views\Shared\_Index.cshtml" />
     <Content Include="Views\Trashcollection\Customer\CreatePickup.cshtml" />
     <Content Include="Views\Trashcollection\Customer\PickupDetails.cshtml" />
     <Content Include="Views\Trashcollection\Customer\CancelPickup.cshtml" />
