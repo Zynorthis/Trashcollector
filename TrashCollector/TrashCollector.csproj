@@ -266,6 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Trashcollection\Admin\" />
     <Folder Include="Views\Trash\" />
   </ItemGroup>
   <ItemGroup>

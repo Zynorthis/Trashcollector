@@ -1,15 +1,49 @@
-﻿@*@model TrashCollector.Models.Customer*@
-
-@{
-    ViewBag.Title = "Home Page";
+﻿@{
+    ViewBag.Title = "Welcome Page";
 }
 <body>
     <center>
-        <h2> Welcome </h2>
+        @if (ViewBag.displayMenu == "Admin")
+        {
+            <h1> Admin Login Successful, Welcome. </h1>
+            <h3> Manage Roles Below </h3>
+            <ul>
+                <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
+            </ul>
+        }
+        else if (ViewBag.displayMenu == "Employee")
+        {
+            <h1> Employee Login Successful, Welcome </h1>
 
-        <div>
-            <h4> Select what it is you'd like to do. </h4>
-        </div>
+            <div>
+                <h3> Select what it is you'd like to do. </h3>
+                <ul>
+                    <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
+                </ul>
+            </div>
+        }
+        else if (ViewBag.displayMenu == "Customer")
+        {
+            <h1> Customer Login Successful, Welcome </h1>
+
+            <div>
+                <h3> Select what it is you'd like to do. </h3>
+                <ul>
+                    <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
+                </ul>
+            </div>
+        }
+        else
+        {
+            <h1> Welcome </h1>
+
+            <div>
+                <h3> Role not assigned, contact your administrator about role assignment. </h3>
+                <ul>
+                    <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
+                </ul>
+            </div>
+        }
     </center>
 </body>
 
