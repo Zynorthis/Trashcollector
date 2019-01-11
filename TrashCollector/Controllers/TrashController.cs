@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,6 +16,33 @@ namespace TrashCollector.Controllers
 
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ViewBag.Name = user.Name;
+
+                if (CheckUserIdentity() == "Admin")
+                {
+                    User.IsInRole("Admin");
+                    ViewBag.displayMenu = "Admin";
+                }
+                else if (CheckUserIdentity() == "Employee")
+                {
+                    ViewBag.displayMenu = "Employee";
+                }
+                else if (CheckUserIdentity() == "Customer")
+                {
+                    ViewBag.displayMenu = "Customer";
+                }
+                else
+                {
+                    ViewBag.Name = "Not Logged In";
+                }
+            }
+            else
+            {
+                ViewBag.Name = "Not Logged In";
+            }
             return View();
         }
 
@@ -79,6 +108,36 @@ namespace TrashCollector.Controllers
             catch
             {
                 return View();
+            }
+        }
+        private string CheckUserIdentity()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+
+                var s = userManager.GetRoles(user.GetUserId());
+                if (s[0].ToString() == "Admin")
+                {
+                    return "Admin";
+                }
+                else if (s[0].ToString() == "Employee")
+                {
+                    return "Employee";
+                }
+                else if (s[0].ToString() == "Customer")
+                {
+                    return "Customer";
+                }
+                else
+                {
+                    return "Error";
+                }
+            }
+            else
+            {
+                return "Error";
             }
         }
     }

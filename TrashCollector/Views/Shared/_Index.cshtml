@@ -1,15 +1,17 @@
-﻿@{
+﻿@model TrashCollector.Models.ViewModel
+@{
     ViewBag.Title = "Welcome Page";
 }
 <body>
     <center>
         @if (ViewBag.displayMenu == "Admin")
         {
+
             <h1> Admin Login Successful, Welcome. </h1>
             <h3> Manage Roles Below </h3>
-            <ul>
-                <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
-            </ul>
+            @*@<ul>
+                    <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
+                </ul>*@
         }
         else if (ViewBag.displayMenu == "Employee")
         {
