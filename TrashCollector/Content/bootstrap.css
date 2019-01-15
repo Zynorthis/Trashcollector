@@ -38,9 +38,9 @@ audio:not([controls]) {
   display: none;
   height: 0;
 }
-[hidden],
+icon-bar[hidden],
 template {
-  display: none;
+    display: none;
 }
 a {
   background-color: transparent;

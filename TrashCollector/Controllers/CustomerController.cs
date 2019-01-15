@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
     public class CustomerController : Controller
     {
+        ApplicationDbContext context;
+
+        public CustomerController()
+        {
+            context = new ApplicationDbContext();
+        }
         // GET: Customer
         public ActionResult Index()
         {
@@ -23,7 +30,15 @@ namespace TrashCollector.Controllers
         // GET: Customer/Create
         public ActionResult Create()
         {
-            return View();
+            ViewBag.States = new SelectList(context.States.Where(s => s.StateAbbrivation.Contains(s.StateAbbrivation)).ToList(), "States", "States");
+
+            List<string> days = new List<string>()
+            {
+                "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+            };
+            ViewBag.Days = new SelectList(days.Where(d => d == d), "Days", "Days");
+
+            return View("CreatePickup");
         }
 
         // POST: Customer/Create

@@ -14,7 +14,7 @@ namespace TrashCollector.Controllers
         // instantuating database object
         ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index()
+        public ActionResult _Index()
         {
             if (User.Identity.IsAuthenticated)
             {
