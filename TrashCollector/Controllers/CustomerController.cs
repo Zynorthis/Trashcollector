@@ -45,7 +45,7 @@ namespace TrashCollector.Controllers
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(Pickups model)
+        public ActionResult Create(Pickups model, int ID)
         {
             try
             {
@@ -73,11 +73,11 @@ namespace TrashCollector.Controllers
                 context.Pickups.Add(newPickup);
                 context.SaveChanges();
 
-                return RedirectToAction("_Index");
+                return RedirectToAction("PickupDetails", new { id = newPickup.ID });
             }
             catch
             {
-                return View("_Index");
+                return View("CreatePickup");
             }
         }
 

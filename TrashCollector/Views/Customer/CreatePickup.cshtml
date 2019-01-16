@@ -16,10 +16,10 @@
     <hr />
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Customer.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Address.Customer.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Customer.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Customer.Name, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Address.Customer.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Address.Customer.Name, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -28,10 +28,10 @@
         @Html.LabelFor(model => model.Address.Address1, "Address", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Address.Address1, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Pickup.Address.Address1, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Address.Address1, "", new { @class = "text-danger" })
             <br />
             @Html.EditorFor(model => model.Address.Address2, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Pickup.Address.Address2, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Address.Address2, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -39,7 +39,7 @@
         @Html.LabelFor(model => model.Address.State.StateAbbrivation, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("State", (SelectList)ViewBag.States, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Pickup.Address.State.StateAbbrivation, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Address.State.StateAbbrivation, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -47,7 +47,7 @@
         @Html.LabelFor(model => model.Address.Zipcode, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Address.Zipcode, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Pickup.Address.Zipcode, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Address.Zipcode, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -55,7 +55,7 @@
         @Html.LabelFor(model => model.PickupDay, "Pickup Day", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("Pickup Day", (SelectList)ViewBag.Days, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Pickup.PickupDay, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.PickupDay, "", new { @class = "text-danger" })
         </div>
     </div>
 
