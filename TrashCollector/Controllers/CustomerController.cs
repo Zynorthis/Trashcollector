@@ -52,6 +52,7 @@ namespace TrashCollector.Controllers
                 Pickups newPickup = new Pickups();
                 newPickup.PickupDay = model.PickupDay;
                 newPickup.IsCompleted = false;
+                newPickup.CompletionDate = "Not Completed Yet";
 
                 Address addressFromDb = context.Address.Where(a => a.Address1 == model.Address.Address1).SingleOrDefault();
                 if (addressFromDb == null)
