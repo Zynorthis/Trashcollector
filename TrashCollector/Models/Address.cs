@@ -12,22 +12,26 @@ namespace TrashCollector.Models
         [Key]
         public int ID { get; set; }
 
-
+        
+        [Required]
         [Display(Name = "Address Line 1")]
-        public int Address1 { get; set; }
-
+        public string Address1 { get; set; }
 
         [Display(Name = "Address Line 2")]
-        public int Address2 { get; set; }
+        public string Address2 { get; set; }
 
-
+        [Required]
         [Display(Name = "Zip Code")]
         public int Zipcode { get; set; }
 
-
-        [ForeignKey("States")]
+        [Required]
+        [ForeignKey("State")]
         [Display(Name = "State")]
         public int StateRefID { get; set; }
-        public States States { get; set; }
+        public States State { get; set; }
+
+        [ForeignKey("Customer")]
+        public int CustId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

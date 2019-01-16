@@ -7,13 +7,13 @@ namespace TrashCollector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class RemoveDaysAddPickupsAddressAndStates : IMigrationMetadata
+    public sealed partial class DBTablesUpdate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveDaysAddPickupsAddressAndStates));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DBTablesUpdate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901101954114_RemoveDaysAddPickupsAddressAndStates"; }
+            get { return "201901161608173_DBTablesUpdate"; }
         }
         
         string IMigrationMetadata.Source

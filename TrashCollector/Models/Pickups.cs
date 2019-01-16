@@ -23,5 +23,14 @@ namespace TrashCollector.Models
 
         [Display(Name = "Completion Date")]
         public string CompletionDate { get; set; }
+
+        [Required]
+        [ForeignKey("Address")]
+        [Display(Name = "Address")]
+        public int AddressRefID { get; set; }
+        public Address Address { get; set; }
+
+        [Display(Name = "Employee")]
+        public string EmployeeName { get; set; }
     }
 }

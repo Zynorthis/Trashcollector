@@ -30,30 +30,54 @@ namespace TrashCollector.Controllers
         // GET: Customer/Create
         public ActionResult Create()
         {
-            ViewBag.States = new SelectList(context.States.Where(s => s.StateAbbrivation.Contains(s.StateAbbrivation)).ToList(), "States", "States");
+            ViewBag.States = new SelectList(context.States.Where(s => s.StateAbbrivation.Contains(s.StateAbbrivation)).ToList(), "ID", "StateAbbrivation");
 
             List<string> days = new List<string>()
             {
                 "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
             };
-            ViewBag.Days = new SelectList(days.Where(d => d == d), "Days", "Days");
+            ViewBag.Days = new SelectList(days);
 
+            //return View("CreatePickup", "Trashcollection");
             return View("CreatePickup");
+
         }
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Pickups model)
         {
             try
             {
-                // TODO: Add insert logic here
+                Pickups newPickup = new Pickups();
+                newPickup.PickupDay = model.PickupDay;
+                newPickup.IsCompleted = false;
 
-                return RedirectToAction("Index");
+                Address addressFromDb = context.Address.Where(a => a.Address1 == model.Address.Address1).SingleOrDefault();
+                if (addressFromDb == null)
+                {
+                    newPickup.Address.Address1 = model.Address.Address1;
+                    newPickup.Address.Address2 = model.Address.Address2;
+                    newPickup.Address.Zipcode = model.Address.Zipcode;
+                    newPickup.Address.State.StateAbbrivation = model.Address.State.StateAbbrivation;
+                }
+                else
+                {
+                    newPickup.Address.Address1 = addressFromDb.Address1;
+                    newPickup.Address.Address2 = addressFromDb.Address2;
+                    newPickup.Address.Zipcode = addressFromDb.Zipcode;
+                    newPickup.Address.State.StateAbbrivation = addressFromDb.State.StateAbbrivation;
+                }
+                newPickup.Address.Customer.Name = model.Address.Customer.Name;
+
+                context.Pickups.Add(newPickup);
+                context.SaveChanges();
+
+                return RedirectToAction("_Index");
             }
             catch
             {
-                return View();
+                return View("_Index");
             }
         }
 

@@ -11,11 +11,11 @@ namespace TrashCollector.Models
         [Key]
         public string ID { get; set; }
 
-
+        [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
 
-
+        [Required]
         [Display(Name = "Zip Code")]
         public int Zipcode { get; set; }
     }
