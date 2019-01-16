@@ -20,7 +20,7 @@
             <div class="row">
                 @Html.ActionLink("Home", "_Index", "Trash", new { area = "" }, new { @class = "btn btn-default" })
                 @Html.ActionLink("Pickups", "DisplayPickups", "Employee", new { area = "" }, new { @class = "btn btn-default" })
-                @Html.ActionLink("Map Route", "MapRoute", "Employee", new { area = "" }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Customer Location", "Map", "Employee", new { area = "" }, new { @class = "btn btn-default" })
             </div>
         }
         else if (ViewBag.displayMenu == "Customer")

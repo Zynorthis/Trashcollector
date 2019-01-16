@@ -18,13 +18,15 @@ namespace TrashCollector.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            return View();
+            return View("_Index");
         }
 
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Pickups pickupFromDB = context.Pickups.Where(p => p.ID == id).FirstOrDefault();
+
+            return View("PickupDetails", pickupFromDB);
         }
 
         // GET: Customer/Create
@@ -85,22 +87,39 @@ namespace TrashCollector.Controllers
         // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Pickups pickupFromDB = context.Pickups.Where(p => p.ID == id).FirstOrDefault();
+
+            ViewBag.States = new SelectList(context.States.Where(s => s.StateAbbrivation.Contains(s.StateAbbrivation)).ToList(), "ID", "StateAbbrivation");
+            List<string> days = new List<string>()
+            {
+                "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+            };
+            ViewBag.Days = new SelectList(days);
+
+            return View("EditPickup", pickupFromDB);
         }
 
         // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Pickups pickup)
         {
             try
             {
-                // TODO: Add update logic here
+                Pickups pickupFromDB = context.Pickups.Where(p => p.ID == id).FirstOrDefault();
+                pickupFromDB.Address.Customer.Name = pickup.Address.Customer.Name;
+                pickupFromDB.Address.Address1 = pickup.Address.Address1;
+                pickupFromDB.Address.Address1 = pickup.Address.Address2;
+                pickupFromDB.Address.State.StateAbbrivation = pickup.Address.State.StateAbbrivation;
+                pickupFromDB.Address.Zipcode = pickup.Address.Zipcode;
+                pickupFromDB.PickupDay = pickup.PickupDay;
 
-                return RedirectToAction("Index");
+                context.SaveChanges();
+
+                return RedirectToAction("PickupDetails", id);
             }
             catch
             {
-                return View();
+                return View("PickupDetails", id);
             }
         }
 

@@ -270,6 +270,7 @@
     <Content Include="Views\Customer\PickupDetails.cshtml" />
     <Content Include="Views\Employee\DisplayPickups.cshtml" />
     <Content Include="Views\Employee\MapRoute.cshtml" />
+    <Content Include="Views\Employee\CustomerLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

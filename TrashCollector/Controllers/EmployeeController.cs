@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
     public class EmployeeController : Controller
     {
+        ApplicationDbContext context;
+
+        public EmployeeController()
+        {
+            context = new ApplicationDbContext();
+        }
         // GET: Employee
         public ActionResult Index()
         {
@@ -83,6 +90,25 @@ namespace TrashCollector.Controllers
             catch
             {
                 return View();
+            }
+        }
+        [HttpGet]
+        public ActionResult Map()
+        {
+            return View("CustomerLocation");
+        }
+        [HttpPost]
+        public ActionResult Map(Customer customer)
+        {
+            try
+            {
+                Customer customerFromDB = context.Customer.Where(c => c.Name == customer.Name).FirstOrDefault();
+                
+                return RedirectToAction("CustomerLocation", customerFromDB);
+            }
+            catch
+            {
+                return View("CustomerLocation");
             }
         }
     }
