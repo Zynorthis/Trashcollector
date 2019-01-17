@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -18,5 +19,9 @@ namespace TrashCollector.Models
         [Required]
         [Display(Name = "Zip Code")]
         public int Zipcode { get; set; }
+
+        [ForeignKey("AspUser")]
+        public string AspNetUserID { get; set; }
+        public ApplicationUser AspUser { get; set; }
     }
 }

@@ -15,6 +15,11 @@ namespace TrashCollector.Models
         [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
+
+        [ForeignKey("AspUser")]
+        public string AspNetUserID { get; set; }
+        public ApplicationUser AspUser { get; set; }
+
         // public IEnumerable<Pickups> PickupDay { get; set; }
         // public List<Days> PickupDays { get; set; }
     }

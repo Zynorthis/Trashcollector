@@ -38,7 +38,7 @@
     function initMap() {
         var obj = @Html.Raw(Json.Encode(Model));
         const Http = new XMLHttpRequest();
-        const url = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAfrIwFDBpUyJHiS4-SLGYkuT02m0DvyNY&address=';
+        const url = 'https://maps.googleapis.com/maps/api/geocode/json?key='+@ViewBag.Key;
         Http.open("GET", url, false);
         Http.send();
 
@@ -56,4 +56,3 @@
 * The key parameter will contain your own API key (which is not needed for this tutorial)
 * The callback parameter executes the initMap() function
 -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfrIwFDBpUyJHiS4-SLGYkuT02m0DvyNY&callback=initMap"></script>

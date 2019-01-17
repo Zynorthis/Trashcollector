@@ -1,0 +1,40 @@
+﻿@model TrashCollector.Models.Customer
+
+@{
+    ViewBag.Title = "Weekly Recurring";
+}
+
+<h2>Weekly Recurring</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4> Pick your regular weekly pickup day </h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.WeeklyRecurring.PickupDay, "Pickup Day", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Pickup Day", (SelectList)ViewBag.Days, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.WeeklyRecurring.PickupDay, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Home", "_Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

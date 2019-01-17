@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,7 @@ namespace TrashCollector.Controllers
         // GET: Customer
         public ActionResult Index()
         {
+            //ViewModel model = context.Customer.Where(c => c.Name == context)
             return View("_Index");
         }
 
@@ -39,7 +41,13 @@ namespace TrashCollector.Controllers
                 "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
             };
             ViewBag.Days = new SelectList(days);
-
+            ViewModel viewmodel = new ViewModel()
+            {
+                Pickups = new Pickups(),
+                Address = new Address(),
+                Customer = new Customer(),
+                States = new States()
+            };
             //return View("CreatePickup", "Trashcollection");
             return View("CreatePickup");
 
@@ -47,41 +55,53 @@ namespace TrashCollector.Controllers
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(Pickups model, int ID)
+        public ActionResult Create(ViewModel model)
         {
-            try
-            {
-                Pickups newPickup = new Pickups();
-                newPickup.PickupDay = model.PickupDay;
-                newPickup.IsCompleted = false;
-                newPickup.CompletionDate = "Not Completed Yet";
+            string currentUserId = User.Identity.GetUserId();
+
+                //try
+                //{
+                    //Pickups newPickup = new Pickups();
+                    //newPickup.Address = new Address();
+                    //newPickup.PickupDay = model.PickupDay;
+                    //newPickup.IsCompleted = false;
+                    //newPickup.CompletionDate = "Not Completed Yet";
+                model.Address.CustId = context.Customer.Where(e => e.AspNetUserID == currentUserId).Single().ID;
+                States stateFromDB = context.States.Where(s => s.StateAbbrivation == model.States.StateAbbrivation).FirstOrDefault();
+                model.Address.StateRefID = stateFromDB.ID;
+
+                model.Pickups.IsCompleted = false;
+                model.Pickups.CompletionDate = "Not Completed Yet";
+                model.Address.Customer.AspNetUserID = currentUserId;
 
                 Address addressFromDb = context.Address.Where(a => a.Address1 == model.Address.Address1).SingleOrDefault();
                 if (addressFromDb == null)
                 {
-                    newPickup.Address.Address1 = model.Address.Address1;
-                    newPickup.Address.Address2 = model.Address.Address2;
-                    newPickup.Address.Zipcode = model.Address.Zipcode;
-                    newPickup.Address.State.StateAbbrivation = model.Address.State.StateAbbrivation;
+                    //newPickup.Address.Address1 = model.Address.Address1;
+                    //newPickup.Address.Address2 = model.Address.Address2;
+                    //newPickup.Address.Zipcode = model.Address.Zipcode;
+                    //newPickup.Address.State.StateAbbrivation = model.Address.State.StateAbbrivation;
+                    context.Address.Add(model.Address);
                 }
                 else
                 {
-                    newPickup.Address.Address1 = addressFromDb.Address1;
-                    newPickup.Address.Address2 = addressFromDb.Address2;
-                    newPickup.Address.Zipcode = addressFromDb.Zipcode;
-                    newPickup.Address.State.StateAbbrivation = addressFromDb.State.StateAbbrivation;
+                    model.Address.Address1 = addressFromDb.Address1;
+                    model.Address.Address2 = addressFromDb.Address2;
+                    model.Address.Zipcode = addressFromDb.Zipcode;
+                    model.Address.State.StateAbbrivation = addressFromDb.State.StateAbbrivation;
                 }
-                newPickup.Address.Customer.Name = model.Address.Customer.Name;
 
-                context.Pickups.Add(newPickup);
+                context.Customer.Add(model.Customer);
+                context.Pickups.Add(model.Pickups);
+
                 context.SaveChanges();
 
-                return RedirectToAction("PickupDetails", new { id = newPickup.ID });
-            }
-            catch
-            {
-                return View("CreatePickup");
-            }
+                return RedirectToAction("PickupDetails", new { id = model.Pickups.ID });
+            //}
+            //catch
+            //{
+                return RedirectToAction("Create");
+            //}
         }
 
         // GET: Customer/Edit/5
@@ -149,8 +169,10 @@ namespace TrashCollector.Controllers
         }
         public ActionResult List()
         {
+            //List<Pickups> pickupList = context.Pickups.Where(p => p.Address.Customer.ID == id).ToList();
+            List<Pickups> pickupList = context.Pickups.ToList();
             ViewBag.ModelBool = context.Pickups.Any();
-            return View("PickupList");
+            return View("PickupList", pickupList);
         }
     }
 }

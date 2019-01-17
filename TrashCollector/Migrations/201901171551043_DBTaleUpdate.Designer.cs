@@ -7,13 +7,13 @@ namespace TrashCollector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class DBTablesUpdate : IMigrationMetadata
+    public sealed partial class DBTaleUpdate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(DBTablesUpdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DBTaleUpdate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901161608173_DBTablesUpdate"; }
+            get { return "201901171551043_DBTaleUpdate"; }
         }
         
         string IMigrationMetadata.Source

@@ -3,7 +3,7 @@ namespace TrashCollector.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -62,6 +62,7 @@ namespace TrashCollector.Migrations
                         IsCompleted = c.Boolean(nullable: false),
                         CompletionDate = c.String(),
                         AddressRefID = c.Int(nullable: false),
+                        EmployeeName = c.String(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Addresses", t => t.AddressRefID, cascadeDelete: true)

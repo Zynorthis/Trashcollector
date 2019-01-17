@@ -95,6 +95,7 @@ namespace TrashCollector.Controllers
 
         public ActionResult Map()
         {
+            ViewBag.Key = APIKeys.GoogleAPI;
             return View("CustomerLocation");
         }
         [HttpPost]
