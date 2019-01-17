@@ -18,7 +18,7 @@ namespace TrashCollector.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            return View();
+            return View("_Index");
         }
 
         // GET: Employee/Details/5
@@ -92,7 +92,7 @@ namespace TrashCollector.Controllers
                 return View();
             }
         }
-        [HttpGet]
+
         public ActionResult Map()
         {
             return View("CustomerLocation");
