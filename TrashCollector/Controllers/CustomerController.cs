@@ -126,23 +126,31 @@ namespace TrashCollector.Controllers
         // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Pickups pickup = context.Pickups.Where(p => p.ID == id).FirstOrDefault();
+            return View("CancelPickup", pickup);
         }
 
         // POST: Customer/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Pickups pickup)
         {
             try
             {
-                // TODO: Add delete logic here
+                Pickups pickupFromDb = context.Pickups.Where(p => p.ID == pickup.ID).FirstOrDefault();
+                context.Pickups.Remove(pickupFromDb);
+                context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("PickupList");
             }
             catch
             {
                 return View();
             }
+        }
+        public ActionResult List()
+        {
+            ViewBag.ModelBool = context.Pickups.Any();
+            return View("PickupList");
         }
     }
 }

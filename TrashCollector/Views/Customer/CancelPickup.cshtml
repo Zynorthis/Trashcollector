@@ -1,4 +1,4 @@
-﻿@model TrashCollector.Models.Customer
+﻿@model TrashCollector.Models.Pickups
 
 @{
     ViewBag.Title = "Cancel Pickup";
@@ -10,12 +10,13 @@
 <div>
     <h4>Pickup</h4>
     <hr />
+    @Html.HiddenFor(model => model.ID)
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.PickupDay)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.PickupDay)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Address.Address1)
@@ -23,12 +24,15 @@
         <dd>
             @Html.DisplayFor(model => model.Address.Address1)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address.Address2)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Address.Address2)
-        </dd>
+        @if (Model.Address.Address2 != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Address.Address2)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Address.Address2)
+            </dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.Address.Zipcode)
         </dt>
@@ -36,16 +40,10 @@
             @Html.DisplayFor(model => model.Address.Zipcode)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Pickups.PickupDay)
+            @Html.DisplayNameFor(model => model.IsCompleted)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Pickups.PickupDay)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Pickups.IsCompleted)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Pickups.IsCompleted)
+            @Html.DisplayFor(model => model.IsCompleted)
         </dd>
     </dl>
 
@@ -54,7 +52,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "List")
         </div>
     }
 </div>
